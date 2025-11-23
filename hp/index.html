@@ -58,6 +58,19 @@
         html {
             scroll-behavior: smooth;
         }
+        
+        #mobile-menu {
+            transition: all 0.3s ease;
+        }
+        
+        #mobile-menu.hidden {
+            max-height: 0;
+            overflow: hidden;
+        }
+        
+        #mobile-menu:not(.hidden) {
+            max-height: 500px;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -76,9 +89,19 @@
                     <a href="#process" class="text-gray-700 hover:text-purple-600 transition">開発フロー</a>
                     <a href="#contact" class="text-gray-700 hover:text-purple-600 transition">お問い合わせ</a>
                 </div>
-                <button class="md:hidden text-gray-700">
-                    <i class="fas fa-bars text-2xl"></i>
+                <button id="hamburger-btn" class="md:hidden text-gray-700 focus:outline-none">
+                    <i id="hamburger-icon" class="fas fa-bars text-2xl"></i>
                 </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+                <div class="px-4 py-4 space-y-4">
+                    <a href="#services" class="block text-gray-700 hover:text-purple-600 transition py-2">サービス</a>
+                    <a href="#technology" class="block text-gray-700 hover:text-purple-600 transition py-2">技術スタック</a>
+                    <a href="#works" class="block text-gray-700 hover:text-purple-600 transition py-2">実績</a>
+                    <a href="#process" class="block text-gray-700 hover:text-purple-600 transition py-2">開発フロー</a>
+                    <a href="#contact" class="block text-gray-700 hover:text-purple-600 transition py-2">お問い合わせ</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -603,6 +626,38 @@
     </footer>
 
     <script>
+        // Hamburger menu toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const hamburgerIcon = document.getElementById('hamburger-icon');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            if (hamburgerBtn && mobileMenu && hamburgerIcon) {
+                hamburgerBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    
+                    // Toggle icon between bars and times
+                    if (mobileMenu.classList.contains('hidden')) {
+                        hamburgerIcon.classList.remove('fa-times');
+                        hamburgerIcon.classList.add('fa-bars');
+                    } else {
+                        hamburgerIcon.classList.remove('fa-bars');
+                        hamburgerIcon.classList.add('fa-times');
+                    }
+                });
+                
+                // Close menu when clicking on a link
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                        hamburgerIcon.classList.remove('fa-times');
+                        hamburgerIcon.classList.add('fa-bars');
+                    });
+                });
+            }
+        });
+        
         // Smooth scroll for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
