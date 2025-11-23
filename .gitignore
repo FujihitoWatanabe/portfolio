@@ -1,20 +1,42 @@
-# OS files
+# OS生成ファイル
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
-desktop.ini
+Desktop.ini
 
-# Editor files
+# エディタ設定
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
+.project
+.classpath
+.settings/
 
-# Logs
+# ログファイル
 *.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Environment variables
+# 一時ファイル
+*.tmp
+*.temp
+*.bak
+*.cache
+
+# 環境変数ファイル
 .env
 .env.local
+.env.*.local
 
+# ビルドファイル（必要に応じて）
+dist/
+build/
+*.min.js
+*.min.css
